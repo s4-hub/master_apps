@@ -2,9 +2,7 @@
 Master apps
 
 Depedencies :
-Python3.7
-Virtual Enviroments
-PIP
+Python3.7, Virtual Enviroments, PIP
 
 How to :
 - Setelah selesai virtual environments, crate venv : $ python3.7 -m venv my_env (di windows sama perintahnya)
