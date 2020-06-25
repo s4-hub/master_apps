@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Aplikasi TK Winback Kacab Langsa
+{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li class="active">Daftar TK Winback</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+    <div class="animated fadeIn">
+    <!-- Animateda -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">List TK Winback</strong>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="card-body--">
+                    <div class="table-stats order-table ov-h">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>NIK</th>
+                                    <th>NAMA</br>LENGKAP</th>
+                                    <th>TGL</br>LAHIR</th>
+                                    <th>NO</br>HANDPHONE</th>
+                                    <th>EMAIL</th>
+                                    <th>JENIS</br>PEKERJAAN 1</th>
+                                    
+                                    <th>LOKASI</br>PEKERJAAN</th>
+                                    <th>UPAH</th>
+                                    <th>PAKET</th>
+                                    <th>IURAN</th>
+                                    <th>TOTAL</br>IURAN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in datas %}
+                                <tr>
+                                    <td class="serial">{{forloop.counter}}</td>
+                                    <td>{{data.nik}}</td>
+                                    <td>{{data.nama}}</td>
+                                    <td>{{data.tgl_lahir}}</td>
+                                    <td>{{data.no_hp}}</td>
+                                    <td>{{data.surel}}</td>
+                                    <td>
+                                        {% if data.jenis_pekerjaan2 is None %}
+                                            {{data.jenis_pekerjaan}}
+                                        {% else %}
+                                            {{data.jenis_pekerjaan}}</br>{{data.jenis_pekerjaan2}}
+                                        {% endif %}</td>
+                                    <td>{{data.lokasi_pekerjaan}}</td>
+                                    <td>RP.{{data.upah|intcomma}}
+                                    <td>{{data.get_kode_paket_display}}</td>
+                                    <td>{{data.get_kode_iuran_display}}</td>
+                                    <td>Rp. {{data.total|intcomma}}
+                                </tr>
+                                
+                                {% endfor %}
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                    <div class="col-12">
+                        <a href="{% url 'winback:export_xls' %}" class="btn btn-primary">Export</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

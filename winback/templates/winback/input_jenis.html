@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Form Input Jenis Pekerjaan
+{% endblock title %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+<div class="animated fadeIn">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Input Jenis Pekerjaan</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form method="post">
+                    {% csrf_token %}
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Nama Pekerjaan</label> 
+                            <div class="col-sm-8">
+                                    {{form.nama_pekerjaan}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="kode">Kode Pekerjaan</label> 
+                            <div class="col-sm-8">
+                                    {{form.kode}}
+                                
+                            </div>
+                        </div> 
+                        <div class="form-group row">
+                            <div class="col-12">
+                            <a href="{% url 'winback:upload_pekerjaan' %}">Upload</a>
+                            </div>
+                            <div class="offset-8 col-6">
+                            <button name="submit" type="submit" class="btn btn-primary" data-toggle="modal" data-target="sideModalBL">Submit</button>
+                            </div>
+                            <!-- To change the direction of the modal animation change .right class -->
+                            <div class="modal fade right" id="sideModalBL" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                            aria-hidden="true">
+
+                            <!-- Add class .modal-side and then add class .modal-top-right (or other classes from list above) to set a position to the modal -->
+                            <div class="modal-dialog modal-side modal-bottom-left" role="document">
+
+
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title w-100" id="myModalLabel">Simpan Data</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- Side Modal Top Right -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+{% endblock content %}

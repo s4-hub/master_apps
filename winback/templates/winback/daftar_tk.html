@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Pendaftaran TK Winback
+{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li class="active">Pendaftaran TK</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+<div class="animated fadeIn">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Pendaftaran TK Winback</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form method="post">
+                    {% csrf_token %}
+                    {% if form.subject.errors %}
+                        <ol role="alertdialog">
+                            {% for error in form.subject.errors %}
+                            <li role="alert"><strong>{{ error|escape }}</strong></li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">NIK</label> 
+                            <div class="col-sm-6">
+                                    {{form.nik}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Nama Lengkap</label> 
+                            <div class="col-sm-6">
+                                    {{form.nama}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Tgl. Lahir</label> 
+                            <div class="col-sm-4">
+                                    {{form.tgl_lahir}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">No. Handphone</label> 
+                            <div class="col-sm-4">
+                                    {{form.no_hp}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Email</label> 
+                            <div class="col-sm-4">
+                                    {{form.surel}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Jenis Pekerjaan I</label> 
+                            <div class="col-sm-6">
+                                    {{form.jenis_pekerjaan}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Jenis Pekerjaan 2</label> 
+                            <div class="col-sm-6">
+                                    {{form.jenis_pekerjaan2}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Lokasi Pekerjaan</label> 
+                            <div class="col-sm-6">
+                                    {{form.lokasi_pekerjaan}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Upah</label> 
+                            <div class="col-sm-4">
+                                    {{form.upah}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Kode Paket</label> 
+                            <div class="col-sm-4">
+                                    {{form.kode_paket}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Kode Iuran</label> 
+                            <div class="col-sm-4">
+                                    {{form.kode_iuran}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-8 col-6">
+                            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

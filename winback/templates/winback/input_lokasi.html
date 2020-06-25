@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Input Lokasi Pekerjaan
+{% endblock title %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li class="active">Input Lokasi</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+<div class="animated fadeIn">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Form Input Lokasi Pekerjaan</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    <form method="post">
+                    {% csrf_token %}
+                        <div class="form-group row">
+                            <label class=" col-2 col-form-label">Nama Kota</label> 
+                            <div class="col-sm-8">
+                                    {{form.nama_kota}}
+                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label" for="kode">Kode Kota</label> 
+                            <div class="col-sm-8">
+                                    {{form.kode}}
+                                
+                            </div>
+                        </div> 
+                        <div class="form-group row">
+                            <div class="col-12">
+                            <a href="{% url 'winback:upload_lokasi' %}">Upload</a>
+                            </div>
+                            <div class="offset-8 col-6">
+                            
+                            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- test -->
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Petunjuk Penggunaan</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    
+                </div>
+            </div>
+        </div>
+        <!-- akhir test -->
+    </div>
+    
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+{% endblock script %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Daftar Antrian Online Per{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li class="active">Daftar Antrian Online</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Daftar Antrian Online</strong>
+                        </div>
+                        <div class="col" align="right">
+                            <a href="{% url 'antol:upload' %}" class="btn btn-primary btn-sm"
+                                role="button">Upload CSV</a>
+                        </div>
+                        <div class="col" align="left">
+                        <label for="tgl1"> Tanggal Antrian</label>
+                            <input type="date" id="tgl1" name="tgl_cari">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body--">
+                    <div class="table-stats order-table ov-h">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>Kode Booking</th>
+                                    <th>KPJ</th>
+                                    <th>NIK</th>
+                                    <th>NAMA</th>
+                                    <th>Email</th>
+                                    <th>No Handphone</th>
+                                    <th>SHIFT</th>
+                                    <th>KEGIATAN</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in datas %}
+                                <tr>
+                                    <td class="serial">{{forloop.counter}}</td>
+                                    <td>{{data.kode}}</td>
+                                    <td>{{data.kpj}}</td>
+                                    <td>{{data.nik}}</td>
+                                    <td>{{data.nama}}</td>
+                                    <td>{{data.no_hp}}</td>
+                                    <td>{{data.email}}</td>
+                                    <td>{{data.shift}}</td>
+                                    <td>{{data.kegiatan}}</td>
+                                </tr>
+                                
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}
