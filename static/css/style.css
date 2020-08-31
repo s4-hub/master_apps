@@ -619,7 +619,7 @@ canvas {
 
 .order-table tr td:last-child,
 .order-table tr th:last-child {
-  text-align: right;
+  text-align: center;
 }
 
 .order-table tr:last-child td {
@@ -1217,6 +1217,7 @@ aside.left-panel:hover {
   width: 100%;
   background-color: #fff;
   padding: 0 1.25em 0 0;
+  height: 54.3px;
 }
 
 .right-panel .navbar-header>a {

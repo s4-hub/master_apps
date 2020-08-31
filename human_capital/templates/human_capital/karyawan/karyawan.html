@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Daftar Karyawan Kacab Langsa{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li class="active">Daftar Karyawan</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">List Karyawan</strong>
+                        </div>
+                        {% if user.is_superuser %}
+                        <div class="col" align="right">
+                            <a href="{% url 'hcp:tambah_k' %}" class="btn btn-primary btn-sm"
+                                role="button">Tambah</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body--">
+                    <div class="table-responsive">
+                    <table class="table table-fixed" id="dtBasicExample">
+                        <thead>
+                        <tr align="center">
+                            <th scope="col">#</th>
+                            <th scope="col" class="avatar">Foto</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">NIK</th>
+                            <th scope="col">Tgl. Lahir</th>
+                            <th scope="col">Gol. Darah</th>
+                            <th scope="col">Alamat</th>
+                            {% if user.is_superuser %}
+                            <th scope="col">Aksi</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in datas %}
+                        <tr align="center">
+                            <th scope="row" class="serial">{{ forloop.counter }}</th>
+                            <td class="avatar">
+                                <div class="round-img">
+                                    <a href="#"><img class="rounded-circle" width="50px" height="50px"
+                                                    src="{% if data.karyawan.photo %}{{data.karyawan.photo.url}}{% else %}#{% endif %}"
+                                                        alt=""></a>
+                                </div>
+                            </td>
+                            <td><a href="{% url 'hcp:detail_k' pk=data.pk %}">{{ data.karyawan.nama }}</a></td>
+                            <td>{{ data.nik }}</td>
+                            <td>{{ data.tgl_lhr }}</td>
+                            <td>{{ data.get_gol_darah_display }}</td>
+                            <td>{{ data.alamat|linebreaksbr }}</td>
+                            
+                            {% if user.is_superuser %}
+                            <td>
+                                        <a href="{% url 'hcp:edit_k' pk=data.pk %}"><i class="fa fa-pencil"></i>
+                                            edit</a> |
+                                        <a href="#" data-toggle="modal" data-target="#staticModal{{ data.pk }}"><i
+                                                class="fa fa-trash-o"></i>
+                                            hapus</a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                            <div class="modal fade" id="staticModal{{ data.pk }}" tabindex="-1" role="dialog"
+                                aria-labelledby="staticModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="alert alert-danger" role="alert">
+                                                <h5 class="modal-title" id="staticModalLabel">Peringatan</h5>
+                                            </div>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                Apakah anda ingin menghapus data {{ data.karyawan.nama }}?
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                data-dismiss="modal">Batal</button>
+                                            <a class="btn btn-danger btn-sm" role="button"
+                                                href="{% url 'hcp:hapus_k' pk=data.pk %}">Iya</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+
+<script>
+// Basic example
+    $(document).ready(function () {
+    $('#dtBasicExample').DataTable({
+        "paging": true,
+        "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+    });
+    $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+
+{% endblock script %}

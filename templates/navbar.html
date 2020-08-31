@@ -33,6 +33,22 @@
                     </ul>
                 </li>
 
+                <li class="menu-title">Kepesertaan</li>
+                    <li
+                        class="menu-item-has-children dropdown {% if url_name == 'kepesertaan:home' or url_name == 'kepesertaan:upload' %}active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-th-list"></i>Menu Kepesertaan</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li>
+                                <a href="{% url 'kepesertaan:home' %}"><i class="fa fa-th-list"></i>Daftar Perusahaan</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'kepesertaan:upload' %}"><i class="fa fa-building"></i>Upload Perusahaan</a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+
                 <li class="menu-title">Antrian Online</li>
                     <li
                         class="menu-item-has-children dropdown {% if url_name == 'antol:home' or url_name == 'antol:simpan' %}active{% endif %}">
@@ -44,6 +60,9 @@
                             </li>
                             <li>
                                 <a href="{% url 'antol:simpan' %}"><i class="fa fa-building"></i>Upload Antrian Online</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'antol:template' %}"><i class="fa fa-envelope-o"></i>Buat Template Pesan</a>
                             </li>
                         </ul>
                     </li>
@@ -78,6 +97,52 @@
                             <li>
                                 <a href="{% url 'winback:input_jenis' %}"><i class="fab fa-boxes    "></i> Input Pekerjaan</a>
                             </li>
+                        </ul>
+                    </li>
+                
+                <li class="menu-title">Human Capital</li>
+                <li
+                    class="menu-item-has-children dropdown {% if url_name == 'hcp:home' or url_name == 'hcp:tambah_k'%} active{% endif %}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"><i class="menu-icon fa fa-cross"></i>Karyawan</a>
+                        <ul class="sub-menu children dropdown-menu">
+                        {% if user.is_superuser %}
+                            <li>
+                                <a href="{% url 'hcp:tambah_k' %}"><i class="fa fa-cross"></i>Tambah Karyawan</a>
+                            </li>
+                        {% endif %}
+                            <li>
+                                <a href="{% url 'hcp:home' %}"><i class="fa fa-user"></i>List Karyawan</a>
+                            </li>
+                        </ul>
+                </li>
+                <li
+                    class="menu-item-has-children dropdown {% if url_name == 'hcp:detail' or url_name == 'hcp:tambah_k'%} active{% endif %}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"><i class="menu-icon fa fa-cross"></i>Karyawan</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li>
+                                <a href="{% url 'hcp:tambah_k' %}"><i class="fa fa-cross"></i>Tambah Karyawan</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'hcp:home' %}"><i class="fa fa-user"></i>List Karyawan</a>
+                            </li>
+                        </ul>
+                </li>
+
+                <li class="menu-title">Laporan Aset IT</li>
+                    <li
+                        class="menu-item-has-children dropdown {% if url_name == 'aset:home' or url_name == 'aset:tambah' %}active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-th-list"></i>Aset IT</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li>
+                                <a href="{% url 'aset:home' %}"><i class="fa fa-th-list"></i>Daftar Aset IT</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'aset:tambah' %}"><i class="fa fa-building"></i>Input Aset</a>
+                            </li>
+                            
                         </ul>
                     </li>
 

@@ -46,7 +46,7 @@ Aplikasi TK Winback Kacab Langsa
                 </div>
                 <div class="card-body--">
                     <div class="table-stats order-table ov-h">
-                        <table class="table ">
+                        <table class="table" id="contoh">
                             <thead>
                                 <tr>
                                     <th class="serial">#</th>
@@ -72,7 +72,7 @@ Aplikasi TK Winback Kacab Langsa
                                     <td>{{data.nama}}</td>
                                     <td>{{data.tgl_lahir}}</td>
                                     <td>{{data.no_hp}}</td>
-                                    <td>{{data.surel}}</td>
+                                    <td id="email">{{data.surel}}</td>
                                     <td>
                                         {% if data.jenis_pekerjaan2 is None %}
                                             {{data.jenis_pekerjaan}}
@@ -103,4 +103,16 @@ Aplikasi TK Winback Kacab Langsa
 {% endblock content %}
 
 {% block script %}
+<script src="{% static 'js/jquery-3.5.1.js' %}" type="text/javascript"></script>
+
+<script>
+$(document).ready(function(){
+    
+    $("#email").each( function(){
+    $(this).html();
+});
+});
+
+</script>
+
 {% endblock script %}

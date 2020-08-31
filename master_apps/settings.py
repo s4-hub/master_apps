@@ -25,14 +25,16 @@ SECRET_KEY = '__yw8b78voh%zp2$4=$#vr5)dxr1-ecij@kh5u07a3krdn8$67'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','172.25.14.59','langsa.ip-dynamic.com','0.0.0.0', 'localhost','0.tcp.ngrok.io']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # 'corsheaders',
     'dal',
     'dal_select2',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +47,10 @@ INSTALLED_APPS = [
     'human_capital.apps.HumanCapitalConfig',
     'antol.apps.AntolConfig',
     'winback.apps.WinbackConfig',
+    'inventaris_apps.apps.InventarisAppsConfig',
+    'menu_kepesertaan.apps.MenuKepesertaanConfig',
+    'menu_wasrik.apps.MenuWasrikConfig',
+    'stockopname.apps.StockopnameConfig'
 ]
 
 SITE_ID = 1
@@ -52,6 +58,8 @@ SITE_ID = 1
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
+    # 'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +68,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CORS_ORIGIN_WHITELIST = [
+#     'https://localhost:8000',
+#     'http://localhost:8000',
+    
+# ]
 
 ROOT_URLCONF = 'master_apps.urls'
 
@@ -74,6 +88,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'akun.context_processors.avatar',
             ],
         },
     },
@@ -141,12 +156,16 @@ MEDIA_URL = '/media/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'druidskatsumoto001@gmail.com'
-EMAIL_HOST_PASSWORD = '4711812ias'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'kacab.langsa@bpjsketenagakerjaan.go.id'
+EMAIL_HOST_PASSWORD = 'Langsaa02'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AVATAR_SESSION_ID = 'avatar'
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240

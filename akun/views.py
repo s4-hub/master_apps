@@ -1,9 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from dal import autocomplete
+from django.shortcuts import render, redirect
+# from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.contrib.auth.models import User
 from .models import Profil
 from .forms import LoginForm, ProfilEditForm
 
@@ -13,24 +14,6 @@ def dashboard(request):
                   'account/dashboard.html',
                   {'section': 'dashboard'})
 
-def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request,
-                                username=cd['username'],
-                                password=cd['password'])
-            if user is not None:
-                login(request, user)
-                return HttpResponse('Konfirmasi berhasil')
-            else:
-                return HttpResponse('Akun di nonaktifkan account')
-        else:
-            return HttpResponse('Info masuk tidak valid')
-    else:
-        form = LoginForm()
-    return render(request, 'account/login.html', {'form': form})
 
 @login_required
 def edit(request):
@@ -56,3 +39,35 @@ def edit(request):
                   'account/edit.html',
                   {
                    'profil_form': profil_form})
+
+@login_required
+def input_profil(request):
+    if request.method == 'POST':
+        form = ProfilEditForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            # _,  created = Keluarga.objects.update_or_create(
+            #     k_karyawan = 
+            # )
+            post.save()
+            
+
+            return redirect('hcp:tambah_k')
+    else:
+        form = ProfilEditForm()
+
+    return render(request,'account/edit.html', {'form':form})
+
+class AkunAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return User.objects.none()
+
+        data_user = User.objects.all()
+        
+        if self.q:
+            data_user = data_user.filter(username__icontains=self.q).order_by('id')
+            
+            # data_user = data_user.filter(full_name__icontains=self.q)
+        return data_user 

@@ -40,7 +40,7 @@ class DaftarForm(forms.ModelForm):
 
         widgets = {
             'nik':forms.TextInput(
-                attrs={'class':'form-control'}),
+                attrs={'class':'form-control', 'id':'nik'}),
             'nama':forms.TextInput(
                 attrs={'class':'form-control'}),
             'tgl_lahir':forms.TextInput(

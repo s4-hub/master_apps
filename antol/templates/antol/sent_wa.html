@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Kirim Notifikasi ke WA - {{data_k.nama}}
+{% endblock title %}
+
+{% block content %}
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong>Basic Form</strong> Elements
+        </div>
+        <div class="card-body card-block">
+            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">No HP</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">Username</p>
+                    </div>
+                </div>
+                
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Disabled Input</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="disabled-input" name="disabled-input" placeholder="Disabled" disabled="" class="form-control" value="{{no}}"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Pesan</label></div>
+                    <div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Content..." class="form-control" value={{pesan}}></textarea></div>
+                </div>
+                
+            </form>
+        </div>
+        <div class="card-footer">
+            <a href="https://web.whatsapp.com/send?phone={{no}}&text={{pesan}}&source&data&app_absent" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+            <button type="reset" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Reset
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<a href="https://web.whatsapp.com/send?phone=6282277507924&text={{pesan}}&source&data&app_absent" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+{% endblock content %}

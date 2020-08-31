@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.utils.datastructures import MultiValueDictKeyError
 # from django.core.files.storage import FileSystemStorage
 
 from .models import Antol
+from .forms import TemplateForm
 import PyPDF2 as pypdf
 import csv
 import io
@@ -13,13 +14,13 @@ from tabula import convert_into
 
 
 # Create your views here.
+def manual_replace(s, char, index):
+    return s[:index]+char+s[index+1:]
 
 def index(request):
-    # if request.method == 'GET':
-    #     # tgl = request.GET['tgl_cari']
-    #     # cari = 
+    datas = Antol.objects.all()
     context = {
-        'datas': Antol.objects.all()
+        'datas': datas
 
     }
     return render(request, 'antol/index.html', context)
@@ -83,8 +84,8 @@ def simpan(request):
                     kpj=column[2],
                     nik=column[3],
                     nama=column[4],
-                    email=column[5],
-                    no_hp=column[6],
+                    no_hp=column[5],
+                    email=column[6],
                     shift=column[7],
                     kegiatan=column[8],
                     tgl_antol=tgl
@@ -97,19 +98,32 @@ def simpan(request):
     context = {}
     return render(request, 'antol/upload.html', context)
 
-def send_wa(request):
-    pesan = """
-            Selamat pagi bpk/ibu peserta BPJS Ketenagakerjaan. Saat ini kami hanya ingin menginformasikan bahwasannya akan ada petugas kami yang akan menghubungi bpk/ibu baik melalui video call atau pun telepon untuk mengkorfimasi terhadap pengajuan Klaim JHT yang sebelumnya bpk/ibu ajukan secara online. Diharapkan kpd bpk/ibu menyiapkan berkas-berkas berupa KTP, KK, Parklaring, KPJ dan buku tabungan.
-            Terima Kasih."""
-    no_tepon = Antol.objects.all().filter('no_hp')
-    # url = 'https://web.whatsapp.com/send?phone="{}"&text="{}"&source&data&app_absent'.format(no_tepon, pesan)
+def template_pesan(request):
     
-    if request.method == 'GET':
-        tgl_cari = request.GET['tgl_cari']
-        datas = Antol.objects.filter(-tgl_cari)
+    if request.method == 'POST':
+        form = TemplateForm(request.POST)
 
-        return render(request,'antol/index.html',{'datas':datas, 'pesan':pesan})
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+
+            return redirect('antol:home')
     else:
-        semua = Antol.objects.all()
+        form = TemplateForm()
+    return render(request, 'antol/template.html', {'form':form})
 
-    return render(request, 'antol/index.html',{'semua':semua, 'pesan':pesan})
+def send_wa(request, pk):
+    data_k = get_object_or_404(Antol, pk=pk)
+
+    pesan = """Yth. bpk/ibu {}. %0A%0ASaat ini kami hanya ingin menginformasikan bahwasannya akan ada petugas kami yang akan menghubungi bpk/ibu baik melalui video call atau pun telepon untuk mengkorfimasi terhadap pengajuan Klaim JHT yang sebelumnya bpk/ibu ajukan secara online.%0ADiharapkan kpd bpk/ibu menyiapkan berkas-berkas berupa *KTP, KK, Parklaring, KPJ dan buku tabungan*.
+            %0A%0ATerima Kasih.""".format(data_k.nama)
+    pesan2 = request.POST.get('textarea-input')
+    
+    no = manual_replace(data_k.email,'62',0)
+    context = {
+        'data_k':data_k,
+        'pesan':pesan,
+        'no':no
+    }
+
+    return render(request, 'antol/sent_wa.html', context)

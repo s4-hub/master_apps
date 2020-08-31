@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Laporan Inventaris Aset IT Kacab Langsa
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/buttons.dataTables.min.css' %}">
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li class="active">Daftar Aset IT Kacab Langsa</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<div class="content">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Daftar Aset IT Kacab Langsa</strong>
+                        </div>
+                        <div class="col" align="right">
+                            <a href="{% url 'aset:export' %}" class="btn btn-primary btn-sm">Export</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card-body--">
+                    <div class="table-stats order-table ov-h">
+                        <table class="table" id="example">
+                            <thead>
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>No Register Aset</th>
+                                    <th>Nama User</th>
+                                    <th>Bidang</th>
+                                    <th>Jenis Aset</th>
+                                    <th>Merk / Type</th>
+                                    <th>OCS Inventory</th>
+                                    <th>ANTIVIRUS</th>
+                                    <th>UPDATE</th>
+                                    <th>Maintenance I</th>
+                                    <th>Maintenance II</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for asset in assets %}
+                                <tr>
+                                    <td class="serial">{{forloop.counter}}</td>
+                                    <td>{{asset.no_reg}}</td>
+                                    <td>{{asset.nama_user}}</td>
+                                    <td>{{asset.bidang.nama}}</td>
+                                    <td>{{asset.jenis_aset.nama}}</td>
+                                    <td>
+                                    <a href="#" data-toggle="modal" data-target="#staticModal{{asset.pk}}">
+                                        {{asset.merk_type}}
+                                    </a>
+                                    </td>
+
+                                    <td>
+                                    {% if asset.ocs_inventory %}
+                                        <i class="fa fa-check-square-o"></i> Installed
+                                    {% else %}
+                                        <i class="fa fa-minus-circle"></i> Not Installed
+                                    {% endif %}
+                                    </td>
+                                    <td>
+                                    {% if asset.antivirus %}
+                                        <i class="fa fa-check-square-o"></i> Trend Micro Installed
+                                    {% else %}
+                                        <i class="fa fa-minus-circle"></i> Not Installed
+                                    {% endif %}
+                                    </td>
+                                    <td>
+                                    {% if asset.update %}
+                                        <i class="fa fa-check-square-o"></i> Updated
+                                    {% else %}
+                                        <i class="fa fa-minus-circle"></i> Not Updated
+                                    {% endif %}
+                                    </td>
+                                    <td>
+                                    {% if asset.maintenance_done is Null %}
+                                        Belum Maintenance                                        
+                                    {% else %}
+                                        {{asset.maintenance_done}}
+                                    {% endif %}
+                                    </td>
+                                    <td>
+                                    {% if asset.maintenance_next is Null %}
+                                        Belum Maintenance                                        
+                                    {% else %}
+                                        {{asset.maintenance_next}}
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="staticModal{{ asset.pk }}" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticModalLabel"><b>{{asset.merk_type}} Specification</b></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6"><label class=" form-control-label">Serial Number</label></div>
+                                                        <div class="col-12 col-md-9">
+                                                            <p style="color:red"><b>{{asset.serial_num}}</b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6"><label class=" form-control-label">Tahun Pengadaan</label></div>
+                                                        <div class="col col-md-9"><b>{{asset.tahun_pengadaan}}</b></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6"><label class=" form-control-label">IP Address</label></div>    
+                                                        <div class="col col-md-9"><i>{{asset.ip_addr}}</i></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6"><label class=" form-control-label">Sistem Operasi</label></div>
+                                                        <div class="col col-md-9">{{asset.operasi_sistem.nama}}</div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6"><label class=" form-control-label">Lisensi OS</label></div>
+                                                        <div class="col col-md-9"><i>{{asset.lisensi_os}}</i></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6"><label class=" form-control-label">Microsoft Office</label></div>
+                                                        <div class="col col-md-9">{{asset.office.nama}}</div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6"><label class=" form-control-label">Lisensi Office</label></div>
+                                                        <div class="col col-md-9"><i>{{asset.lisensi_office}}</i></div>
+                                                    </div>
+                                                
+                                                        
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+
+<script src="{% static 'js/jquery-3.5.1.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/dataTables.buttons.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/buttons.flash.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/jszip.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/pdfmake.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/vfs_fonts.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/buttons.html5.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/buttons.print.min.js' %}" type="text/javascript"></script>
+
+
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+            },
+            {
+                extend: 'excelHtml5'
+            }
+        ]
+    } );
+} );
+
+</script>
+{% endblock script %}

@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Detail Karir {{cuser}} {% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li><a href="{% url 'hcp:home' %}">List Karyawan </a></li>
+                            <li class="active">Karir Karyawan {% if cuser.is_superuser %}{% else %}{{cuser}}{% endif %}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" style="height: 280px;"
+                    {% for data in datas %}
+                    src="{% if data.karyawan_k.karyawan.photo %}{{ data.karyawan_k.karyawan.photo.url }}{% else %}#{% endif %}"
+                    alt="{{ data.karyawan_k.karyawan.nama }}">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Data Karir Karyawan</strong>
+                        </div>
+                        {% if user.is_superuser %}
+                        <div class="col" align="right">
+                            <a href="{% url 'hcp:tambah_karir' %}" class="btn btn-primary btn-sm"
+                                role="button">Tambah</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                
+                    <dl>
+                        <dt class="col-md-4">Nama</dt>
+                        <dd class="col-md-8">{{ data.karyawan_k.karyawan.nama }}</dd>
+                    </dl>
+                    <dl>
+                        <dt class="col-md-4">Status</dt>
+                        <dd class="col-md-8">{{ data.get_status_karir_display }}</dd>
+                    </dl>
+                    
+                    <dl>
+                        <dt class="col-md-4">Tgl. Efektif</dt>
+                        <dd class="col-md-8">{{ data.tgl_efektif }}
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="col-md-4">Job Desc.</dt>
+                        <dd class="col-md-8">{{ data.get_job_desk_display }}
+                        </dd>
+                    </dl>
+                        
+                        <dl>
+                            <dt class="col-md-4">Unit Kerja</dt>
+                            <dd class="col-md-8">{{ data.unit_kerja }}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="col-md-4">Masa Kerja</dt>
+                            <dd class="col-md-8">{{ data.masa_kerja }}
+                            </dd>
+                        </dl>
+                        
+                        <dl>
+                            <dt class="col-md-4">Status Masa Kerja</dt>
+                            <dd class="col-md-8">
+                            {% if data.masa_kerja >= 5 %}
+                                Rekomendasi Mutasi
+                            {% else %}
+                                -
+                            {% endif %}
+                            </dd>
+                        </dl>
+                        
+                    <dl>
+                        <dt class="col-md-4"></dt>
+                        <dd class="col-md-8">
+                        </dd>
+                    </dl>
+                    
+                    <div class="row m-0">
+                        <div class="col">
+                        {% if user.is_superuser %}
+                            <a class="btn btn-danger btn-sm" role="button" href="#" data-toggle="modal"
+                                data-target="#staticModal">Hapus</a>
+                        {% endif %}
+                        </div>
+                        <div class="col" align="right">
+                            <a href="{% url 'hcp:tambah_karir' %}" class="btn btn-primary btn-sm"
+                                role="button">Edit</a>
+                            <a href="{% url 'hcp:home' %}" class="btn btn-primary btn-sm"
+                                role="button">Kembali</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="alert alert-danger" role="alert">
+                        <h5 class="modal-title" id="staticModalLabel">Peringatan</h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Apakah anda ingin menghapus data karyawan {{ data.karyawan_k.nama }}?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a class="btn btn-danger" role="button" href="#">Iya</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

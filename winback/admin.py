@@ -13,7 +13,7 @@ class AdminDaftar(admin.ModelAdmin):
     ]
 
     list_filter = [
-        'nama','time_stamp','nik','tgl_lahir'
+        'nama','time_stamp','nik','tgl_lahir','surel'
     ]
 @admin.register(LokasiPekerjaan)
 class LokasiAdmin(admin.ModelAdmin):

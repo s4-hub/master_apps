@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Input Kategori
+{% endblock title %}
+
+{% block style %}
+<link href="{% static 'css/jquery.dataTables.min.css' %}" rel="stylesheet" />
+{% endblock style %}
+
+{% block content %}
+<div class="content">
+    <div class="animated fadeIn">
+
+        <div class="row">
+                    
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">Input Kategori Stock</div>
+                    <div class="card-body card-block">
+                        <form method="post" class="">
+                            {% csrf_token %}
+                            
+                            {{form|crispy}}
+                            <div class="row">
+                                <div class="col-md-6" align="right">
+                                    <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                                    <a href="{% url 'stockopname:home' %}" class="btn btn-primary btn-sm"
+                                        role="button">Batal</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+        <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">Daftar Kategori</div>
+                    <div class="card-body card-block">
+                        
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in datas  %}
+                        <tr>
+                            
+                            <td>{{data.nama}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+   
+
+    </div><!-- .animated -->
+</div><!-- .content -->
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+
+</script>
+
+
+{% endblock script %}

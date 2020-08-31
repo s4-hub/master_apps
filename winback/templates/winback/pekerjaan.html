@@ -6,6 +6,8 @@ List Jenis Pekerjaan
 {% endblock title %}
 
 {% block style %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
 {% endblock style %}
 
 {% block breadcrumbs %}
@@ -31,7 +33,7 @@ List Jenis Pekerjaan
 <div class="content">
     <div class="animated fadeIn">
             <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
                         <div class="row m-0">
@@ -44,7 +46,7 @@ List Jenis Pekerjaan
                     </div>
                     <div class="card-body--">
                         <div class="table-stats order-table ov-h">
-                            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                     <th class="th-sm">No
@@ -81,10 +83,14 @@ List Jenis Pekerjaan
 {% endblock content %}
 
 {% block script %}
+
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
 <script>
-    // Basic example
-    $(document).ready(function () {
-    $('#dtBasicExample').DataTable({
+  
+ $(document).ready(function () {
+    $('#example').DataTable({
         "paging": true,
         "pagingType": "simple_numbers" // false to disable pagination (or any other option)
     });

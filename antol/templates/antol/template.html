@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Template Pesan WA
+{% endblock title %}
+
+{% block content %}
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong>Basic Form</strong> Elements
+        </div>
+        <div class="card-body card-block">
+            <form action="#" method="post" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Nama Pesan</label></div>
+                    <div class="col-12 col-md-9">
+                        {{form.nama}}
+                    </div>
+                </div>
+                
+                
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Isi Pesan</label></div>
+                    <div class="col-12 col-md-9">{{form.pesan}}</div>
+                </div>
+                
+            </form>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+            <a href="{% url 'antol:home'%}" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Back
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

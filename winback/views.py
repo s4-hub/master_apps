@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
-from datetime import datetime
+# from datetime import datetime
 from django.conf import settings
 
 import io,csv,xlwt
@@ -34,10 +34,12 @@ def InputLokasi(request):
     return render(request,'winback/input_lokasi.html',{'form':form})
 
 def DaftarTK(request):
+    
     if request.method == 'POST':
         form = DaftarForm(request.POST or None)
         if form.is_valid():
             post = form.save(commit=False)
+            # cek = request.POST.get('nik')
             post.save()
 
             return redirect('winback:daftar_tk')

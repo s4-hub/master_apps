@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Upload Daftar Perusahaan
+{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li class="active">Upload</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Upload Daftar Perusahaan</strong>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card-body card-block">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div>
+                            <!-- | means OR operator-->
+                                <strong>{{message|safe}}</strong>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <label for="file"> Upload File</label>
+                            <input type="file" id="file" name="file">
+                            <small>Only accepts CSV files</small>
+                            <button type="submit">Upload</button>
+                        </form>
+                    {% endif %}
+                </div>
+                {% if datas %}
+                <div class="card-body card-block">
+                    <div class="table-stats order-table ov-h">
+                        <table class="table" id="datatable">
+                            <thead>
+                                <tr>
+                                    <th class="serial">#</th>
+                                    <th>NPP</th>
+                                    <th>DIV</th>
+                                    <th>Nama Pemberi Kerjan/</br>Badan Usaha</th>
+                                    <th>Blth</br>Keps</th>
+                                    <th>Total Upah</th>
+                                    <th colspan="2" style="text-align:center">Iuran Terakhir</th>
+                                    <th>Alamat</th>
+                                    <th>Kabupaten</th>
+                                    <th colspan="4" style="text-align:center">Data PIC</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>BLTH</th>
+                                    <th>Jumlah</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
+                                    <th>No HP</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in datas %}
+                                <tr>
+                                    <td class="serial">{{forloop.counter}}</td>
+                                    <td>{{data.npp}}</td>
+                                    <td>{{data.div}}</td>
+                                    <td>{{data.nama}}</td>
+                                    <td>{{data.blth_keps}}</td>
+                                    <td>Rp. {{data.total_upah|intcomma}}</td>
+                                    <td>{{data.iuran_terakhir_blth}}</td>
+                                    <td>Rp. {{data.iuran_terakhir_jlh|intcomma}}</td>
+                                    <td>{{data.alamat}}</td>
+                                    <td>{{data.kabupaten}}</td>
+                                    <td>{{data.nama_pic}}</td>
+                                    <td>{{data.jabatan_pic}}</td>
+                                    <td>{{data.no_hp_pic}}</td>
+                                    
+                                    <td>{{data.email_pic|lower}}</td>
+                                    
+                                    
+                                 
+                                    <td><a href="{% url 'antol:pesan' pk=data.pk %}"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                                </tr>
+                                {% endfor %}
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>                
+{% endblock content %}

@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Form Input Daftar Aset IT
+{% endblock title %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block content %}    
+<form method="post">
+    {% csrf_token %}
+    <div class="content">
+        <div class="animated fadeIn"> 
+            
+                <!-- card menu-->
+                <div class="row-sm-12">
+                
+                    <div class="card">
+                        <div class="card-header">Data Personal Computer</div>
+                            <div class="card-body card-block">
+                                <table class="table table-borderless">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>No. Inventaris :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.no_reg}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Serial Number :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.serial_num}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Nama Komputer :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.nama_komputer}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Tanggal Pemeliharaan :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.maintenance_done}}</div>
+                                            </div> 
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Sistem Operasi :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.operasi_sistem}}</div>
+                                            </div> 
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Ip Address :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.ip_addr}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>User :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.nama_user}}</div>
+                                            </div>   
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Unit Kerja :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.bidang}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Nama Operator :</strong></label></div>
+                                                <div class="col col-sm-8">{{form6.nama}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Perusahaan :</strong></label></div>
+                                                <div class="col col-sm-8">{{form6.perusahaan}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Lisensi OS :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.lisensi_os}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>MAC Address :</strong></label></div>
+                                                <div class="col col-sm-8">{{form.mac_address}}</div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="row-sm-12">
+                    <div class="card">
+                        <div class="card-header">Pemeliharaan Umum</div>
+                            <div class="card-body card-block">
+                                <table class="table table-borderless">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Buat/Update Rescure Disc :</strong></label></div>
+                                                <div class="col col-sm-8">{{form2.rescue_disc}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Update Windows :</strong></label></div>
+                                                <div class="col col-sm-8">{{form2.update_windows}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Clear Browser Cache :</strong></label></div>
+                                                <div class="col col-sm-8">{{form2.clear_browser_cache}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Cek Ruangan Harddisk :</strong></label></div>
+                                                <div class="col col-sm-8">{{form2.cek_ruangan_hdd}}</div>
+                                            </div>   
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Cek Konfigurasi Startup :</strong></label></div>
+                                                <div class="col col-sm-8">{{form2.cek_konfigurasi_startup}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Kosongkan Recycle Bin :</strong></label></div>
+                                                <div class="col col-sm-8">{{form2.kosongkan_recycle_bin}}</div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="row-sm-12">
+                    <div class="card">
+                        <div class="card-header">Pemeliharaan Keamanan</div>
+                            <div class="card-body card-block">
+                                <table class="table table-borderless">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Update Antivirus :</strong></label></div>
+                                                <div class="col col-sm-8">{{form3.update_antivirus}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-4"><label><strong>Full Scanning :</strong></label></div>
+                                                <div class="col col-sm-8">{{form3.full_scanning}}</div>
+                                            </div>   
+                                        </div>
+                                    </div>  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="row-sm-12">
+                    <div class="card">
+                        <div class="card-header">Pemeliharaan Software</div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row form-group">
+                                            <div class="col col-sm-4"><label><strong>Disk Cleanup :</strong></label></div>
+                                            <div class="col col-sm-8">{{form4.disk_cleanup}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row form-group">
+                                            <div class="col col-sm-4"><label><strong>Disk Defragment :</strong></label></div>
+                                            <div class="col col-sm-8">{{form4.disk_defragment}}</div>
+                                        </div>   
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row form-group">
+                                            <div class="col col-sm-4"><label><strong>Uninstall Aplikasi yg tidak perlu :</strong></label></div>
+                                            <div class="col col-sm-8">{{form4.uninstall_app_tdk_perlu}}</div>
+                                        </div>   
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row form-group">
+                                            <div class="col col-sm-4"><label><strong>Restart PC :</strong></label></div>
+                                            <div class="col col-sm-8">{{form4.restart_pc}}</div>
+                                        </div>   
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                <div class="row-sm-12">
+                    <div class="card">
+                        <div class="card-header">Pemeliharaan Hardware</div>
+                            <div class="card-body card-block">
+                                <table class="table table-borderless">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Cek Dead Pixel Monitor :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.dead_pixel_monitor}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Cek Fungsi Keyboard dan Mouse :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.keyboard_mouse}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Cek Cacat Pada Casing :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.cacat_casing}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Cek Fungsi Kipas Pendingin :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.fungsi_cooler_fan}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Pembersihan Casing :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.pembersihan_casing}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Pembersihan Keyboard dan Mouse :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.cleaning_keyboard_mouse}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Pembersihan Kipas Pendingin :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.cleaning_cooler_fan}}</div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-sm-6"><label><strong>Merapikan Kabel :</strong></label></div>
+                                                <div class="col col-sm-6">{{form5.merapikan_kabel}}</div>
+                                            </div>   
+                                        </div>
+                                    </div>  
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" align="right">
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <a href="{% url 'aset:tambah' %}" class="btn btn-primary btn-sm"
+                            role="button">Batal</a>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                
+                    
+                
+                </div>
+                
+                <!-- /card menu-->
+                
+        </div>    
+        <!-- .animated -->
+        
+    </div><!-- .content -->
+    
+
+</form>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+
+{% endblock script %}

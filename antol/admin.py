@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Antol
+from .models import Antol, TemplatePesan
 # Register your models here.
 
 
@@ -10,4 +10,10 @@ class AntolAdmin(admin.ModelAdmin):
         'kode', 'nik', 'kpj',
         'nama', 'no_hp', 'email',
         'shift', 'kegiatan', 'tgl_antol'
+    )
+
+@admin.register(TemplatePesan)
+class PesanAdmin(admin.ModelAdmin):
+    list_display = (
+        'nama','pesan'
     )

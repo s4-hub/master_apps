@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Input Produk
+{% endblock title %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block content %}
+<div class="content">
+    <div class="animated fadeIn">
+
+        <div class="row">
+                    
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">Input Produk</div>
+                    <div class="card-body card-block">
+                        <form method="post" class="">
+                            {% csrf_token %}
+                            
+                            {{form|crispy}}
+                            <div class="row">
+                                <div class="col-md-6" align="right">
+                                    <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                                    <a href="{% url 'stockopname:home' %}" class="btn btn-primary btn-sm"
+                                        role="button">Batal</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+   
+
+    </div><!-- .animated -->
+</div><!-- .content -->
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+
+{% endblock script %}

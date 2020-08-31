@@ -62,14 +62,16 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {% block script %}
+    
+    {% endblock script %}
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery.matchHeight.min.js' %}"></script>
+    
 
-    {% block script %}
-    {% endblock script %}
+    
 
     <script>
         //Get the button
@@ -95,16 +97,6 @@
         }
 
     </script>
-    <script type="text/javascript">
-    // Basic example
-    $(document).ready(function () {
-    $('#dtBasicExample').DataTable({
-        "paging": true,
-        "pagingType": "simple_numbers" // false to disable pagination (or any other option)
-    });
-    $('.dataTables_length').addClass('bs-select');
-    });
-</script>
 
     <script src="{% static 'js/main.js' %}"></script>
 </body>

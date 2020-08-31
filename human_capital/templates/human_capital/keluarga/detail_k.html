@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Detail Karyawan{% endblock title %}
+
+{% block style %}
+{% endblock style %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-12">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="{% url 'home' %}">Dashboard</a></li>
+                            <li><a href="{% url 'hcp:home' %}">List Karyawan </a></li>
+                            <li class="active">Detail Karyawan</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="content">
+    <!-- Animated -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" style="height: 280px;"
+                    src="{% if data_k.karyawan.photo %}{{ data_k.karyawan.photo.url }}{% else %}#{% endif %}"
+                    alt="{{ gbr.nama }}">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row m-0">
+                        <div class="col">
+                            <strong class="card-title">Data Keluarga Karyawan</strong>
+                        </div>
+                        {% if user.is_superuser %}
+                        <div class="col" align="right">
+                            <a href="{% url 'hcp:tambah_k' %}" class="btn btn-primary btn-sm"
+                                role="button">Tambah</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <dl>
+                        <dt class="col-md-4">Nama</dt>
+                        <dd class="col-md-8">{{ data_k.karyawan.nama }}</dd>
+                    </dl>
+                    <dl>
+                        <dt class="col-md-4">Status</dt>
+                        <dd class="col-md-8">{{ data_k.get_status_display }}</dd>
+                    </dl>
+                    {% if data_k.status == 1 %}
+                    <dl>
+                        <dt class="col-md-4">Nama Istri</dt>
+                        <dd class="col-md-8">{{ data_k.istri }}
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="col-md-4">Tgl. Lahir Istri</dt>
+                        <dd class="col-md-8">{{ data_k.tgl_i }}
+                        </dd>
+                    </dl>
+                        {% if data_k.anak_1 %}
+                        <dl>
+                            <dt class="col-md-4">Anak ke-1</dt>
+                            <dd class="col-md-8">{{ data_k.anak_1 }}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="col-md-4">Tgl Lahir</dt>
+                            <dd class="col-md-8">{{ data_k.tgl_lhr_1 }}
+                            </dd>
+                        </dl>
+                        {% endif %}
+                        {% if data_k.anak_2 %}
+                        <dl>
+                            <dt class="col-md-4">Anak ke-2</dt>
+                            <dd class="col-md-8">{{ data_k.anak_2 }}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt class="col-md-4">Tgl Lahir</dt>
+                            <dd class="col-md-8">{{ data_k.tgl_lhr_2 }}
+                            </dd>
+                        </dl>
+                        {% endif %}
+                    {% else %}
+                    <dl>
+                        <dt class="col-md-4"></dt>
+                        <dd class="col-md-8">
+                        </dd>
+                    </dl>
+                    {% endif %}
+                    <div class="row m-0">
+                        <div class="col">
+                        {% if user.is_superuser %}
+                            <a class="btn btn-danger btn-sm" role="button" href="#" data-toggle="modal"
+                                data-target="#staticModal">Hapus</a>
+                        {% else %}
+                            <a class="btn btn-danger btn" role="button" href="{% url 'hcp:karir' %}">Karir</a>
+                        {% endif %}
+                        </div>
+                        <div class="col" align="right">
+                            <a href="{% url 'hcp:edit_k' pk=data_k.pk %}" class="btn btn-primary btn-sm"
+                                role="button">Edit</a>
+                            <a href="{% url 'hcp:home' %}" class="btn btn-primary btn-sm"
+                                role="button">Kembali</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="alert alert-danger" role="alert">
+                        <h5 class="modal-title" id="staticModalLabel">Peringatan</h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Apakah anda ingin menghapus data karyawan {{ data_k.karyawan.nama }}?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <a class="btn btn-danger" role="button" href="{% url 'hcp:hapus_k' pk=data_k.pk %}">Iya</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}
