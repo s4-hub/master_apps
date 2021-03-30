@@ -68,7 +68,7 @@ pycodestyle==2.5.0
 pyexcel-io==0.5.20
 pyexcel-xls==0.5.8
 pyexcel-xlsx==0.5.8
-Pygments==2.6.1
+Pygments==2.7.4
 pylint==2.5.0
 pyparsing==2.4.7
 PyPDF2==1.26.0
