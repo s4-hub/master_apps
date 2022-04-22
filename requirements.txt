@@ -71,7 +71,7 @@ pyexcel-xlsx==0.5.8
 Pygments==2.6.1
 pylint==2.5.0
 pyparsing==2.4.7
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 pyreadline==2.1
 pyrsistent==0.16.0
 python-axolotl==0.2.3
